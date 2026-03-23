@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreFrame — Local Market Leadership on Autopilot</title>
+  <meta name="description" content="CoreFrame builds industry-specific digital frameworks that turn local businesses into regional market leaders. Website, SEO, Google Maps, and content — live in 21 days.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#FFCE26',
+            'gold-dark': '#D4A800',
+            'gold-light': '#FFE066',
+            'gold-muted': 'rgba(255,206,38,0.15)',
+            charcoal: '#0D0D0D',
+            'surface-base': '#111111',
+            'surface-elevated': '#1A1A1A',
+            'surface-floating': '#242424',
+            'text-primary': '#FFFFFF',
+            'text-secondary': 'rgba(255,255,255,0.65)',
+            'text-tertiary': 'rgba(255,255,255,0.4)',
+            'border-subtle': 'rgba(255,255,255,0.08)',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          maxWidth: {
+            content: '1200px',
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: #0D0D0D;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ── */
+    .noise-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      z-index: 1;
+    }
+
+    /* ── Layered shadows ── */
+    .shadow-gold {
+      box-shadow:
+        0 2px 8px rgba(255,206,38,0.08),
+        0 8px 32px rgba(255,206,38,0.06),
+        0 16px 48px rgba(0,0,0,0.4);
+    }
+    .shadow-dark {
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.3),
+        0 8px 24px rgba(0,0,0,0.25),
+        0 16px 48px rgba(0,0,0,0.2);
+    }
+    .shadow-elevated {
+      box-shadow:
+        0 1px 4px rgba(0,0,0,0.3),
+        0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    /* ── Navbar ── */
+    .nav-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px max(24px, 4vw);
+      transition: background 0.35s ease, border-color 0.35s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-bar.stuck {
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+
+    /* ── CTA Buttons ── */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFCE26;
+      color: #0D0D0D;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-gold:hover { transform: translateY(-2px); }
+    .btn-gold:focus-visible { outline: 2px solid #FFCE26; outline-offset: 3px; }
+    .btn-gold:active { transform: translateY(0) scale(0.98); }
+
+    .btn-gold-sm {
+      padding: 10px 24px;
+      font-size: 14px;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #FFCE26;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 15px;
+      border: 1.5px solid rgba(255,206,38,0.35);
+      transition: transform 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-outline:hover { transform: translateY(-2px); border-color: #FFCE26; }
+    .btn-outline:focus-visible { outline: 2px solid #FFCE26; outline-offset: 3px; }
+    .btn-outline:active { transform: translateY(0) scale(0.98); }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0D0D0D;
+      color: #FFCE26;
+      font-weight: 600;
+      padding: 16px 40px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-dark:hover { transform: translateY(-2px); }
+    .btn-dark:focus-visible { outline: 2px solid #0D0D0D; outline-offset: 3px; }
+    .btn-dark:active { transform: translateY(0) scale(0.98); }
+
+    /* ── Hero Cards ── */
+    .hp-header .bdy {
+      display: flex;
+      gap: 16px;
+      padding: 0 max(24px, 4vw);
+    }
+    .header-item {
+      flex: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #1A1A1A;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      cursor: pointer;
+    }
+    .header-item:hover {
+      transform: translateY(-6px);
+    }
+    .hp-header.active .header-item:not(:hover) {
+      opacity: 0.55;
+      transform: scale(0.97);
+    }
+    .header-item .visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .header-item .visual .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .header-item:hover .visual .image {
+      transform: scale(1.06);
+    }
+    .header-item .visual .video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .header-item:hover .visual .video {
+      opacity: 1;
+    }
+    .header-item .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      text-decoration: none;
+      color: #fff;
+      gap: 16px;
+    }
+    .header-item .bottom .txt {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .header-item .bottom .subtext {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+    .header-item .h-button {
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFCE26;
+      border: 1px solid rgba(255,206,38,0.3);
+      padding: 8px 18px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .header-item:hover .h-button {
+      border-color: #FFCE26;
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 767px) {
+      .hp-header .bdy { display: block; padding: 0; }
+      .header-item { margin: 0 8px; border-radius: 16px; }
+      .header-item .bottom { flex-direction: column; align-items: flex-start; }
+      .header-item .h-button { margin-top: 12px; }
+    }
+
+    /* ── Stream Carousel ── */
+    .stream-carousel { display: block; }
+
+    .stream-carousel .content {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .stream-carousel .text-wrapper .item {
+      padding: 20px 24px;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: opacity 0.3s ease, border-color 0.3s ease;
+      opacity: 0.35;
+      border-radius: 0 12px 12px 0;
+    }
+    .stream-carousel .text-wrapper .item.active {
+      opacity: 1;
+      border-left-color: #FFCE26;
+      background: rgba(255,206,38,0.04);
+    }
+    .stream-carousel .text-wrapper .item .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .stream-carousel .text-wrapper .item .stxt {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+    .stream-carousel .text-wrapper .item .loader-bar {
+      height: 2px;
+      background: rgba(255,206,38,0.15);
+      border-radius: 2px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+    .stream-carousel .text-wrapper .item .loader-fill {
+      height: 100%;
+      width: 0;
+      background: #FFCE26;
+      border-radius: 2px;
+    }
+    .stream-carousel .text-wrapper .item.active .loader-fill {
+      animation: loaderGrow 9s linear forwards;
+    }
+    @keyframes loaderGrow {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .stream-carousel .visual-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #1A1A1A;
+    }
+    .stream-carousel .visual-wrapper .v-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .stream-carousel .visual-wrapper .v-item.active {
+      opacity: 1;
+    }
+    .stream-carousel .visual-wrapper .v-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Stream Carousel Mobile */
+    .stream-carousel-mobile { display: none; }
+    .stream-carousel-mobile .sc-card {
+      background: #1A1A1A;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 16px;
+    }
+    .stream-carousel-mobile .sc-card .sc-visual {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .stream-carousel-mobile .sc-card .sc-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .stream-carousel-mobile .sc-card .sc-text {
+      padding: 20px 24px;
+    }
+    .stream-carousel-mobile .sc-card .sc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .stream-carousel-mobile .sc-card .sc-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) {
+      .stream-carousel { display: none !important; }
+      .stream-carousel-mobile { display: block; }
+    }
+    @media (min-width: 1025px) {
+      .stream-carousel.initialized { display: block; }
+      .stream-carousel-mobile { display: none; }
+    }
+
+    /* ── Testimonial Carousel ── */
+    .testimonial-card {
+      background: #1A1A1A;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    .testimonial-card .stars { color: #FFCE26; font-size: 18px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-card .quote {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonial-card .author-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-card .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #242424;
+    }
+    .testimonial-card .author-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .testimonial-card .author-role {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Owl overrides */
+    .owl-theme .owl-dots .owl-dot span {
+      background: rgba(255,255,255,0.2);
+      width: 8px; height: 8px;
+    }
+    .owl-theme .owl-dots .owl-dot.active span {
+      background: #FFCE26;
+    }
+    .owl-theme .owl-nav button.owl-prev,
+    .owl-theme .owl-nav button.owl-next {
+      color: #FFCE26 !important;
+      font-size: 28px !important;
+    }
+
+    /* ── Scroll Reveal ── */
+    .reveal-ready .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-ready .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Section spacing ── */
+    .section-pad {
+      padding-top: clamp(80px, 10vw, 140px);
+      padding-bottom: clamp(80px, 10vw, 140px);
+    }
+    .section-pad-sm {
+      padding-top: clamp(48px, 6vw, 80px);
+      padding-bottom: clamp(48px, 6vw, 80px);
+    }
+
+    /* ── Pill badges ── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.6);
+    }
+    .pill-gold {
+      background: #FFCE26;
+      color: #0D0D0D;
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    /* ── Check list ── */
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: rgba(255,206,38,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .check-icon svg { width: 12px; height: 12px; }
+
+    /* ── Calendly Widget ── */
+    .cal-day {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+      font-family: 'Outfit', sans-serif;
+      cursor: default;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal-day.available {
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      background: rgba(255,255,255,0.04);
+    }
+    .cal-day.available:hover {
+      background: rgba(255,206,38,0.12);
+      color: #FFCE26;
+      transform: scale(1.08);
+    }
+    .cal-day.available:focus-visible {
+      outline: 2px solid #FFCE26;
+      outline-offset: 2px;
+    }
+    .cal-day.available:active {
+      transform: scale(0.95);
+    }
+    .cal-day.selected {
+      background: #FFCE26 !important;
+      color: #0D0D0D !important;
+      font-weight: 700;
+      transform: scale(1.05);
+    }
+    .cal-day.today {
+      box-shadow: inset 0 0 0 1.5px rgba(255,206,38,0.35);
+    }
+    .cal-day.past {
+      color: rgba(255,255,255,0.12);
+    }
+
+    /* Stagger animation for calendar days appearing */
+    .cal-day.animate-in {
+      animation: calDayPop 0.35s ease forwards;
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    @keyframes calDayPop {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Time slot buttons */
+    .cal-time-btn {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .cal-time-btn:hover {
+      background: rgba(255,206,38,0.08);
+      border-color: rgba(255,206,38,0.25);
+      color: #FFCE26;
+      transform: translateY(-2px);
+    }
+    .cal-time-btn:focus-visible {
+      outline: 2px solid #FFCE26;
+      outline-offset: 2px;
+    }
+    .cal-time-btn:active {
+      transform: translateY(0) scale(0.97);
+    }
+    .cal-time-btn.selected {
+      background: rgba(255,206,38,0.15);
+      border-color: #FFCE26;
+      color: #FFCE26;
+      font-weight: 600;
+    }
+
+    /* Time slots slide-in */
+    .cal-times-enter {
+      animation: slideUp 0.4s ease forwards;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Success icon pulse */
+    .cal-success-icon {
+      animation: successPulse 0.6s ease;
+    }
+    @keyframes successPulse {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    #calSuccess h4, #calSuccess p {
+      animation: slideUp 0.5s ease forwards;
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+    #calSuccess p { animation-delay: 0.35s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 1: NAVBAR                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <nav class="nav-bar" id="navbar">
+    <div class="flex items-center justify-between max-w-content mx-auto">
+      <a href="#" class="flex items-center gap-2">
+        <span class="text-lg md:text-xl font-bold tracking-tight text-white font-body">CORE<span style="color: rgba(255,255,255,0.5);">FRAME</span></span>
+      </a>
+      <a href="#book" class="btn-gold btn-gold-sm">Book a Call</a>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: HERO                                            -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center justify-center noise-overlay" style="background: #0D0D0D;">
+    <!-- Radial gradient layers -->
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(255,206,38,0.07) 0%, transparent 70%);"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 70% 50% at 75% 70%, rgba(255,206,38,0.04) 0%, transparent 60%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-48" style="background: linear-gradient(to top, #0D0D0D, transparent);"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto" style="padding-top: 140px; padding-bottom: 100px;">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase mb-6" style="color: #FFCE26;">Systematic Growth</p>
+      <h1 class="reveal reveal-delay-1 font-display text-white font-normal leading-[1.15] mb-6" style="font-size: clamp(2.75rem, 6vw, 5rem);">
+        Niche by Niche.<br>
+        <em class="not-italic" style="color: #FFCE26; font-style: italic;">Region by Region.</em>
+      </h1>
+      <p class="reveal reveal-delay-2 font-body text-lg mb-10 max-w-2xl mx-auto" style="color: rgba(255,255,255,0.55); line-height: 1.7;">
+        We build industry-specific digital frameworks that position local businesses as the undisputed authority in their market. One niche. One region. One dominant player&nbsp;&mdash;&nbsp;you.
+      </p>
+      <div class="reveal reveal-delay-2 flex flex-wrap items-center justify-center gap-3 mb-10">
+        <span class="pill"><svg class="w-3.5 h-3.5 mr-1" fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Lead Generation Guarantee</span>
+        <span class="pill"><svg class="w-3.5 h-3.5 mr-1" fill="#FFCE26" viewBox="0 0 20 20"><path d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/></svg>Area Exclusivity</span>
+        <span class="pill"><svg class="w-3.5 h-3.5 mr-1" fill="#FFCE26" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>Live in 21 Days</span>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <a href="#book" class="btn-gold shadow-gold">
+          Book Your Free Strategy Call
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: HERO CARDS (Video-on-Hover)                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad-sm" style="background: #111111;">
+    <div class="max-w-content mx-auto mb-12 px-6 md:px-0">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase text-center mb-4" style="color: #FFCE26;">What We Build For You</p>
+      <h2 class="reveal reveal-delay-1 font-display text-center text-white font-normal" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        Four Pillars. <em style="color: #FFCE26; font-style: italic;">One Framework.</em>
+      </h2>
+    </div>
+
+    <div class="hp-header" id="heroCards">
+      <div class="bdy" id="hpHeaderBdy">
+        <!-- Card 1: Website -->
+        <div class="header-item">
+          <div class="visual">
+            <img class="image" src="https://placehold.co/600x450/1A1A1A/FFCE26?text=Website+Preview" alt="Modern Website">
+          </div>
+          <a class="bottom" href="#">
+            <div class="left-side">
+              <div class="txt">Modern Website</div>
+              <div class="subtext">Conversion-optimized, mobile-first design built on proven frameworks for your niche.</div>
+            </div>
+            <div class="right-side">
+              <div class="h-button">Learn more</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 2: SEO -->
+        <div class="header-item">
+          <div class="visual">
+            <img class="image" src="https://placehold.co/600x450/1A1A1A/FFCE26?text=SEO+System" alt="SEO Optimization">
+          </div>
+          <a class="bottom" href="#">
+            <div class="left-side">
+              <div class="txt">SEO Optimization</div>
+              <div class="subtext">Targeted strategies that rank you for local keywords that drive real customers.</div>
+            </div>
+            <div class="right-side">
+              <div class="h-button">Learn more</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 3: Google Maps -->
+        <div class="header-item">
+          <div class="visual">
+            <img class="image" src="https://placehold.co/600x450/1A1A1A/FFCE26?text=Google+Maps" alt="Google Maps">
+          </div>
+          <a class="bottom" href="#">
+            <div class="left-side">
+              <div class="txt">Google Maps</div>
+              <div class="subtext">Full Google Business Profile optimization for instant local map visibility.</div>
+            </div>
+            <div class="right-side">
+              <div class="h-button">Learn more</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 4: Content Engine -->
+        <div class="header-item">
+          <div class="visual">
+            <img class="image" src="https://placehold.co/600x450/1A1A1A/FFCE26?text=Content+Engine" alt="Blog Content Engine">
+          </div>
+          <a class="bottom" href="#">
+            <div class="left-side">
+              <div class="txt">Content Engine</div>
+              <div class="subtext">SEO-optimized articles that build authority and generate organic traffic automatically.</div>
+            </div>
+            <div class="right-side">
+              <div class="h-button">Learn more</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: STREAM CAROUSEL (Light)                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad noise-overlay relative" style="background: #0D0D0D;">
+    <div class="relative z-10 max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase mb-4" style="color: #FFCE26;">The Complete Framework</p>
+      <h2 class="reveal reveal-delay-1 font-display text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        One Package. <em style="color: #FFCE26; font-style: italic;">Everything Included.</em>
+      </h2>
+
+      <!-- Desktop Stream Carousel -->
+      <div class="stream-carousel" id="streamLight">
+        <div class="content">
+          <div class="text-wrapper">
+            <div class="item active" data-order="0">
+              <div class="title">Niche-Optimized Website</div>
+              <div class="stxt">Not a generic template. A purpose-built digital storefront engineered for your specific industry — with conversion pathways proven to turn visitors into paying customers.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="1">
+              <div class="title">Search Engine Domination</div>
+              <div class="stxt">On-page optimization, strategic keyword targeting, and technical SEO — all calibrated for local search. Be the first result when customers look for what you offer.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="2">
+              <div class="title">Google Maps Authority</div>
+              <div class="stxt">Full Google Business Profile setup and optimization. Reviews strategy, local citations, and map pack visibility — so you appear the moment someone searches nearby.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="3">
+              <div class="title">Automated Content Engine</div>
+              <div class="stxt">Recurring, SEO-optimized blog articles that compound your authority over time. Written, published, and distributed — entirely by our team. You never lift a finger.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+          </div>
+          <div class="visual-wrapper shadow-dark">
+            <div class="v-item active" data-order="0">
+              <img src="https://placehold.co/800x600/1A1A1A/FFCE26?text=Website+Preview" alt="Website">
+            </div>
+            <div class="v-item" data-order="1">
+              <img src="https://placehold.co/800x600/1A1A1A/FFCE26?text=SEO+Dashboard" alt="SEO">
+            </div>
+            <div class="v-item" data-order="2">
+              <img src="https://placehold.co/800x600/1A1A1A/FFCE26?text=Google+Maps+View" alt="Maps">
+            </div>
+            <div class="v-item" data-order="3">
+              <img src="https://placehold.co/800x600/1A1A1A/FFCE26?text=Content+Calendar" alt="Content">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile stacked cards -->
+      <div class="stream-carousel-mobile">
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/1A1A1A/FFCE26?text=Website" alt="Website"></div>
+          <div class="sc-text">
+            <div class="sc-title">Niche-Optimized Website</div>
+            <div class="sc-desc">A purpose-built digital storefront engineered for your specific industry with proven conversion pathways.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/1A1A1A/FFCE26?text=SEO" alt="SEO"></div>
+          <div class="sc-text">
+            <div class="sc-title">Search Engine Domination</div>
+            <div class="sc-desc">On-page optimization, strategic keyword targeting, and technical SEO calibrated for local search.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/1A1A1A/FFCE26?text=Maps" alt="Maps"></div>
+          <div class="sc-text">
+            <div class="sc-title">Google Maps Authority</div>
+            <div class="sc-desc">Full Google Business Profile setup, reviews strategy, and local citations for map pack visibility.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/1A1A1A/FFCE26?text=Content" alt="Content"></div>
+          <div class="sc-text">
+            <div class="sc-title">Automated Content Engine</div>
+            <div class="sc-desc">Recurring SEO-optimized articles that compound authority. Written, published, and distributed by us.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: USP (Lead Gen Guarantee + Area Exclusivity)    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad relative noise-overlay" style="background: #111111;">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,206,38,0.04) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase text-center mb-4" style="color: #FFCE26;">Why CoreFrame</p>
+      <h2 class="reveal reveal-delay-1 font-display text-center text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        Two Guarantees. <em style="color: #FFCE26; font-style: italic;">Zero Risk.</em>
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Lead Generation Guarantee -->
+        <div class="reveal rounded-[20px] p-10 md:p-12 border shadow-elevated" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background: rgba(255,206,38,0.1);">
+            <svg class="w-7 h-7" fill="#FFCE26" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          </div>
+          <h3 class="font-display text-2xl md:text-3xl text-white mb-4">Lead Generation Guarantee</h3>
+          <p class="text-base leading-relaxed" style="color: rgba(255,255,255,0.55);">
+            We don't just build websites&nbsp;&mdash;&nbsp;we build customer acquisition systems. If your framework doesn't generate measurable leads within the first 90&nbsp;days, we continue working at no additional cost until it does. That's our commitment.
+          </p>
+        </div>
+
+        <!-- Area Exclusivity -->
+        <div class="reveal reveal-delay-1 rounded-[20px] p-10 md:p-12 border shadow-elevated" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background: rgba(255,206,38,0.1);">
+            <svg class="w-7 h-7" fill="#FFCE26" viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3" fill="#0D0D0D"/></svg>
+          </div>
+          <h3 class="font-display text-2xl md:text-3xl text-white mb-4">Area Exclusivity</h3>
+          <p class="text-base leading-relaxed" style="color: rgba(255,255,255,0.55);">
+            We accept only one client per niche per region. Once your territory is secured, no competitor in your industry can access the same framework. Claim your market before someone else does.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: 21-DAY TIMELINE                                -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad" style="background: #0D0D0D;">
+    <div class="max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase text-center mb-4" style="color: #FFCE26;">Your Path to Market Leadership</p>
+      <h2 class="reveal reveal-delay-1 font-display text-center text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        From Zero to Dominant <em style="color: #FFCE26; font-style: italic;">in 21&nbsp;Days.</em>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Phase 1 -->
+        <div class="reveal rounded-[20px] p-8 md:p-10 border shadow-elevated relative overflow-hidden" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #FFCE26, #D4A800);"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background: #FFCE26; color: #0D0D0D;">1</span>
+            <span class="text-xs font-semibold tracking-[0.15em] uppercase" style="color: rgba(255,255,255,0.35);">Day 1</span>
+          </div>
+          <h3 class="font-display text-xl text-white mb-3">Strategy Audit &amp; Exclusivity&nbsp;Check</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color: rgba(255,255,255,0.5);">
+            We analyze your region, assess competition density, and confirm exclusivity for your niche. Sign the agreement. Lock in your territory.
+          </p>
+          <span class="pill text-xs">One exclusive mandate per region</span>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="reveal reveal-delay-1 rounded-[20px] p-8 md:p-10 border shadow-elevated relative overflow-hidden" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #FFCE26, #D4A800);"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background: #FFCE26; color: #0D0D0D;">2</span>
+            <span class="text-xs font-semibold tracking-[0.15em] uppercase" style="color: rgba(255,255,255,0.35);">Day 2–7</span>
+          </div>
+          <h3 class="font-display text-xl text-white mb-3">Smart Onboarding</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color: rgba(255,255,255,0.5);">
+            Our streamlined intake captures everything we need. No technical knowledge required on your part&nbsp;&mdash;&nbsp;our team handles every detail from brand assets to content strategy.
+          </p>
+          <span class="pill text-xs">Zero tech skills needed</span>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="reveal reveal-delay-2 rounded-[20px] p-8 md:p-10 border shadow-elevated relative overflow-hidden" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background: linear-gradient(90deg, #FFCE26, #D4A800);"></div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background: #FFCE26; color: #0D0D0D;">3</span>
+            <span class="text-xs font-semibold tracking-[0.15em] uppercase" style="color: rgba(255,255,255,0.35);">Day 21</span>
+          </div>
+          <h3 class="font-display text-xl text-white mb-3">Win Customers</h3>
+          <p class="text-sm leading-relaxed mb-5" style="color: rgba(255,255,255,0.5);">
+            Your website goes live. SEO systems integrated. Google Business Profile optimized. Content engine running. New customers start finding you&nbsp;&mdash;&nbsp;automatically.
+          </p>
+          <span class="pill text-xs">Full framework operational</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 7: STREAM CAROUSEL (Dark — Differentiators)       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad relative noise-overlay" style="background: #111111;">
+    <div class="relative z-10 max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase mb-4" style="color: #FFCE26;">Built Different</p>
+      <h2 class="reveal reveal-delay-1 font-display text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        Not a Website Agency. <em style="color: #FFCE26; font-style: italic;">A Growth System.</em>
+      </h2>
+
+      <!-- Desktop -->
+      <div class="stream-carousel" id="streamDark">
+        <div class="content">
+          <div class="text-wrapper">
+            <div class="item active" data-order="0">
+              <div class="title">Built for Your Niche</div>
+              <div class="stxt">Every framework is reverse-engineered from the top-performing businesses in your industry. No generic templates. No guesswork. Just data-driven patterns that work.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="1">
+              <div class="title">Automated Content Pipeline</div>
+              <div class="stxt">Blog articles, local landing pages, and social media content — planned, written, and published on a recurring schedule. Your authority grows while you sleep.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="2">
+              <div class="title">Data-Driven Optimization</div>
+              <div class="stxt">Monthly performance reports with keyword rankings, traffic analytics, and lead attribution. We show you exactly where every customer came from.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+            <div class="item" data-order="3">
+              <div class="title">Dedicated Account Manager</div>
+              <div class="stxt">No ticket queues. No chatbots. A single point of contact who knows your business, your market, and your goals. Direct line. Real answers.</div>
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+          </div>
+          <div class="visual-wrapper shadow-dark">
+            <div class="v-item active" data-order="0">
+              <img src="https://placehold.co/800x600/242424/FFCE26?text=Niche+Framework" alt="Niche">
+            </div>
+            <div class="v-item" data-order="1">
+              <img src="https://placehold.co/800x600/242424/FFCE26?text=Content+Pipeline" alt="Content">
+            </div>
+            <div class="v-item" data-order="2">
+              <img src="https://placehold.co/800x600/242424/FFCE26?text=Analytics+Dashboard" alt="Data">
+            </div>
+            <div class="v-item" data-order="3">
+              <img src="https://placehold.co/800x600/242424/FFCE26?text=Account+Manager" alt="Manager">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="stream-carousel-mobile">
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/242424/FFCE26?text=Niche" alt="Niche"></div>
+          <div class="sc-text">
+            <div class="sc-title">Built for Your Niche</div>
+            <div class="sc-desc">Every framework is reverse-engineered from top-performing businesses in your industry.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/242424/FFCE26?text=Content" alt="Content"></div>
+          <div class="sc-text">
+            <div class="sc-title">Automated Content Pipeline</div>
+            <div class="sc-desc">Blog articles, landing pages, social content — planned, written, and published on schedule.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/242424/FFCE26?text=Analytics" alt="Data"></div>
+          <div class="sc-text">
+            <div class="sc-title">Data-Driven Optimization</div>
+            <div class="sc-desc">Monthly performance reports with rankings, traffic analytics, and lead attribution.</div>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div class="sc-visual"><img src="https://placehold.co/800x450/242424/FFCE26?text=Manager" alt="Manager"></div>
+          <div class="sc-text">
+            <div class="sc-title">Dedicated Account Manager</div>
+            <div class="sc-desc">A single point of contact who knows your business. Direct line. Real answers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 8: PRICING                                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad" style="background: #0D0D0D;" id="pricing">
+    <div class="max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase text-center mb-4" style="color: #FFCE26;">Transparent Pricing</p>
+      <h2 class="reveal reveal-delay-1 font-display text-center text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        One Framework. <em style="color: #FFCE26; font-style: italic;">One Price.</em>
+      </h2>
+
+      <div class="reveal max-w-4xl mx-auto rounded-[24px] border shadow-elevated overflow-hidden" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+          <!-- Left: Price -->
+          <div class="p-10 md:p-14 flex flex-col justify-between">
+            <div>
+              <span class="pill-gold text-xs font-bold uppercase tracking-wider mb-6 inline-block" style="padding: 6px 18px; border-radius: 999px; background: #FFCE26; color: #0D0D0D;">Best Practice</span>
+              <div class="mt-6 mb-2">
+                <span class="font-display text-white" style="font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1;">€650</span>
+                <span class="text-lg ml-2" style="color: rgba(255,255,255,0.35);">/&thinsp;month</span>
+              </div>
+              <p class="text-sm mb-8" style="color: rgba(255,255,255,0.4);">+ €3,500 one-time setup fee</p>
+              <div class="flex flex-wrap gap-2 mb-10">
+                <span class="pill text-xs">6-Month Contract</span>
+                <span class="pill text-xs">Exclusive Mandate</span>
+                <span class="pill text-xs">Cancel After</span>
+              </div>
+            </div>
+            <a href="#book" class="btn-gold shadow-gold text-center w-full justify-center">
+              Secure Your Region
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Right: Included -->
+          <div class="p-10 md:p-14 border-t lg:border-t-0 lg:border-l" style="border-color: rgba(255,255,255,0.06);">
+            <p class="text-xs font-semibold tracking-[0.15em] uppercase mb-6" style="color: rgba(255,255,255,0.35);">Included in Every Package</p>
+            <ul class="check-list list-none p-0 m-0 mb-8">
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Modern, niche-optimized website
+              </li>
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Search engine optimization (SEO)
+              </li>
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Google Maps optimization
+              </li>
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Recurring blog content
+              </li>
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Monthly performance reporting
+              </li>
+              <li>
+                <span class="check-icon"><svg fill="#FFCE26" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></span>
+                Dedicated account manager
+              </li>
+            </ul>
+            <div class="rounded-2xl p-5 border" style="background: #242424; border-color: rgba(255,255,255,0.05);">
+              <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.5);">
+                The all-in-one solution for local customer acquisition&nbsp;&mdash;&nbsp;website, SEO, Google Maps, and content from a single source. Live within 21&nbsp;days.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 9: TESTIMONIALS                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad" style="background: #111111;">
+    <div class="max-w-content mx-auto px-6">
+      <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase text-center mb-4" style="color: #FFCE26;">What Our Clients Say</p>
+      <h2 class="reveal reveal-delay-1 font-display text-center text-white font-normal mb-16" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+        Results That <em style="color: #FFCE26; font-style: italic;">Speak for Themselves.</em>
+      </h2>
+
+      <div class="owl-carousel owl-theme" id="testimonialCarousel">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"Within six weeks of launching, we saw a 340% increase in inbound inquiries from Google. CoreFrame didn't just build us a website — they built a customer acquisition machine."</p>
+          <div class="author-row">
+            <img class="author-avatar" src="https://placehold.co/88x88/242424/FFCE26?text=MK" alt="Avatar">
+            <div>
+              <div class="author-name">Markus K.</div>
+              <div class="author-role">Auto Repair Shop Owner, Berlin</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"The exclusivity model was the deciding factor. Knowing that no competitor in my area can get the same system gives me a real strategic advantage. Best investment I've made."</p>
+          <div class="author-row">
+            <img class="author-avatar" src="https://placehold.co/88x88/242424/FFCE26?text=SB" alt="Avatar">
+            <div>
+              <div class="author-name">Sandra B.</div>
+              <div class="author-role">Dental Practice, Munich</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"From signing to going live took exactly 19 days. The onboarding was seamless — I filled out one form, and three weeks later I had a complete digital presence generating leads."</p>
+          <div class="author-row">
+            <img class="author-avatar" src="https://placehold.co/88x88/242424/FFCE26?text=TW" alt="Avatar">
+            <div>
+              <div class="author-name">Thomas W.</div>
+              <div class="author-role">HVAC Services, Hamburg</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"The monthly reporting alone is worth the investment. I can see exactly which keywords are driving traffic and which leads convert. It's like having a marketing department in a box."</p>
+          <div class="author-row">
+            <img class="author-avatar" src="https://placehold.co/88x88/242424/FFCE26?text=LF" alt="Avatar">
+            <div>
+              <div class="author-name">Laura F.</div>
+              <div class="author-role">Physiotherapy Practice, Cologne</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 10: FINAL CTA + CALENDLY BOOKING                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad relative overflow-hidden noise-overlay" style="background: #0D0D0D;" id="book">
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(255,206,38,0.06) 0%, transparent 70%);"></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+      <!-- Heading -->
+      <div class="text-center mb-14">
+        <p class="reveal text-xs font-semibold tracking-[0.25em] uppercase mb-4" style="color: #FFCE26;">Book Your Strategy Call</p>
+        <h2 class="reveal reveal-delay-1 font-display text-white font-normal mb-4" style="font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.2;">
+          Ready to Dominate <em style="color: #FFCE26; font-style: italic;">Your Local Market?</em>
+        </h2>
+        <p class="reveal reveal-delay-2 mx-auto" style="color: rgba(255,255,255,0.45); max-width: 520px; line-height: 1.7;">
+          Pick a time that works for you. We'll analyze your region, confirm exclusivity, and map out your framework.
+        </p>
+      </div>
+
+      <!-- Calendly-style Booking Widget -->
+      <div class="reveal reveal-delay-2 calendly-widget rounded-[24px] border shadow-elevated overflow-hidden max-w-4xl mx-auto" style="background: #1A1A1A; border-color: rgba(255,255,255,0.06);">
+        <div class="grid grid-cols-1 lg:grid-cols-5">
+
+          <!-- Left Panel: Info -->
+          <div class="lg:col-span-2 p-8 md:p-10 border-b lg:border-b-0 lg:border-r" style="border-color: rgba(255,255,255,0.06);">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm" style="background: #FFCE26; color: #0D0D0D;">CF</div>
+              <div>
+                <div class="text-sm font-semibold text-white">CoreFrame</div>
+                <div class="text-xs" style="color: rgba(255,255,255,0.35);">Strategy Team</div>
+              </div>
+            </div>
+            <h3 class="font-display text-xl text-white mb-2">Free Strategy Call</h3>
+            <div class="flex items-center gap-2 mb-4">
+              <svg class="w-4 h-4" fill="none" stroke="#FFCE26" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9" stroke="#FFCE26" stroke-width="2" fill="none"/></svg>
+              <span class="text-sm" style="color: rgba(255,255,255,0.5);">30 min</span>
+              <span style="color: rgba(255,255,255,0.15);">|</span>
+              <svg class="w-4 h-4" fill="none" stroke="#FFCE26" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span class="text-sm" style="color: rgba(255,255,255,0.5);">Google Meet</span>
+            </div>
+            <p class="text-sm leading-relaxed mb-6" style="color: rgba(255,255,255,0.4);">
+              We'll review your market, check regional exclusivity, and walk you through the CoreFrame system — no obligations.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill text-xs">Region Analysis</span>
+              <span class="pill text-xs">Exclusivity Check</span>
+              <span class="pill text-xs">Framework Demo</span>
+            </div>
+          </div>
+
+          <!-- Right Panel: Calendar -->
+          <div class="lg:col-span-3 p-6 md:p-8">
+            <!-- Month Navigation -->
+            <div class="flex items-center justify-between mb-6">
+              <button class="cal-nav-btn w-8 h-8 rounded-full flex items-center justify-center" style="background: rgba(255,255,255,0.05); transition: transform 0.2s ease, opacity 0.2s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <svg class="w-4 h-4" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <span class="text-sm font-semibold text-white" id="calMonthLabel">March 2026</span>
+              <button class="cal-nav-btn w-8 h-8 rounded-full flex items-center justify-center" style="background: rgba(255,255,255,0.05); transition: transform 0.2s ease, opacity 0.2s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <svg class="w-4 h-4" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <!-- Day Headers -->
+            <div class="grid grid-cols-7 gap-1 mb-2">
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Mon</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Tue</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Wed</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Thu</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Fri</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Sat</div>
+              <div class="text-center text-xs font-medium py-1" style="color: rgba(255,255,255,0.25);">Sun</div>
+            </div>
+
+            <!-- Calendar Grid (generated by JS) -->
+            <div class="grid grid-cols-7 gap-1" id="calGrid"></div>
+
+            <!-- Time Slots (shown after date selection) -->
+            <div class="mt-6 hidden" id="calTimeSlots">
+              <p class="text-xs font-semibold uppercase tracking-wider mb-3" style="color: rgba(255,255,255,0.35);">
+                Available times — <span id="calSelectedDate" class="text-white"></span>
+              </p>
+              <div class="grid grid-cols-3 gap-2" id="calTimes"></div>
+            </div>
+
+            <!-- Confirm Button (shown after time selection) -->
+            <div class="mt-6 hidden" id="calConfirm">
+              <a href="#" class="btn-gold shadow-gold text-center w-full justify-center" id="calConfirmBtn">
+                Confirm Booking
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </a>
+            </div>
+
+            <!-- Success State -->
+            <div class="mt-6 hidden text-center py-6" id="calSuccess">
+              <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 cal-success-icon" style="background: rgba(255,206,38,0.12);">
+                <svg class="w-8 h-8" fill="none" stroke="#FFCE26" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              </div>
+              <h4 class="font-display text-xl text-white mb-2">You're Booked!</h4>
+              <p class="text-sm" style="color: rgba(255,255,255,0.45);">Check your email for the Google Meet link.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SECTION 11: FOOTER                                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <footer style="background: #0D0D0D; border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-content mx-auto px-6 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <!-- Col 1: Logo -->
+        <div>
+          <span class="text-lg font-bold tracking-tight text-white font-body inline-block mb-5">CORE<span style="color: rgba(255,255,255,0.5);">FRAME</span></span>
+          <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.4);">
+            Industry-specific digital frameworks for local market leadership. One niche. One region. One dominant&nbsp;player.
+          </p>
+        </div>
+
+        <!-- Col 2: Services -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase mb-5" style="color: rgba(255,255,255,0.35);">Services</h4>
+          <ul class="list-none p-0 m-0 space-y-3">
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Modern Website</a></li>
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">SEO Optimization</a></li>
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Google Maps</a></li>
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Blog Content</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase mb-5" style="color: rgba(255,255,255,0.35);">Company</h4>
+          <ul class="list-none p-0 m-0 space-y-3">
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">About</a></li>
+            <li><a href="#pricing" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Pricing</a></li>
+            <li><a href="#book" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Contact</a></li>
+            <li><a href="#" class="text-sm no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.55); outline-color: #FFCE26;">Imprint</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase mb-5" style="color: rgba(255,255,255,0.35);">Get in Touch</h4>
+          <a href="#book" class="btn-outline text-sm mb-4" style="padding: 10px 24px; font-size: 13px;">Book a Strategy Call</a>
+          <p class="text-sm mt-4" style="color: rgba(255,255,255,0.35);">info@coreframe.io</p>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-top: 1px solid rgba(255,255,255,0.06);">
+        <p class="text-xs" style="color: rgba(255,255,255,0.3);">&copy; <span id="footerYear"></span> CoreFrame. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="text-xs no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.3); outline-color: #FFCE26;">Privacy Policy</a>
+          <a href="#" class="text-xs no-underline transition-opacity duration-200 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style="color: rgba(255,255,255,0.3); outline-color: #FFCE26;">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SCRIPTS                                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <script>
+    /* ── 1. Navbar sticky ── */
+    (function() {
+      const nav = document.getElementById('navbar');
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            if (window.scrollY > 60) {
+              nav.classList.add('stuck');
+            } else {
+              nav.classList.remove('stuck');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+
+    /* ── 2. Hero Cards — hover video + mobile Owl ── */
+    (function() {
+      let owlInit = false;
+
+      function initHeroCards() {
+        const container = document.querySelector('.hp-header');
+        const items = document.querySelectorAll('.header-item');
+        const bdy = document.getElementById('hpHeaderBdy');
+
+        if (window.innerWidth <= 767) {
+          if (!owlInit) {
+            $(bdy).addClass('owl-carousel owl-theme').owlCarousel({
+              loop: true,
+              items: 1,
+              margin: 16,
+              autoWidth: false,
+              smartSpeed: 800,
+              nav: false,
+              dots: true,
+              autoplay: true,
+              autoplayTimeout: 5000,
+            });
+            owlInit = true;
+          }
+        } else {
+          if (owlInit) {
+            $(bdy).trigger('destroy.owl.carousel').removeClass('owl-carousel owl-theme owl-loaded');
+            $(bdy).find('.owl-stage-outer').children().unwrap();
+            $(bdy).find('.owl-stage').children().unwrap();
+            $(bdy).find('.owl-dots, .owl-nav').remove();
+            owlInit = false;
+          }
+
+          items.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+              container.classList.add('active');
+            });
+            item.addEventListener('mouseleave', function() {
+              container.classList.remove('active');
+            });
+          });
+        }
+      }
+
+      initHeroCards();
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initHeroCards, 250);
+      });
+    })();
+
+
+    /* ── 3. Stream Carousel ── */
+    function initStreamCarousel(carouselId) {
+      const carousel = document.getElementById(carouselId);
+      if (!carousel) return;
+
+      const textItems = carousel.querySelectorAll('.text-wrapper .item');
+      const visualItems = carousel.querySelectorAll('.visual-wrapper .v-item');
+      const totalItems = textItems.length;
+      let currentIndex = 0;
+      let timer;
+      let started = false;
+
+      function setActive(index) {
+        textItems.forEach(function(el) { el.classList.remove('active'); });
+        visualItems.forEach(function(el) { el.classList.remove('active'); });
+        textItems[index].classList.add('active');
+        visualItems[index].classList.add('active');
+
+        // Reset loader animation
+        var loaderFill = textItems[index].querySelector('.loader-fill');
+        if (loaderFill) {
+          loaderFill.style.animation = 'none';
+          loaderFill.offsetHeight; // force reflow
+          loaderFill.style.animation = '';
+        }
+      }
+
+      function advance() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        setActive(currentIndex);
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(advance, 9000);
+      }
+
+      textItems.forEach(function(item, idx) {
+        item.addEventListener('click', function() {
+          if (idx !== currentIndex) {
+            currentIndex = idx;
+            setActive(currentIndex);
+            startTimer();
+          }
+        });
+      });
+
+      // Start auto-rotation when in view
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !started) {
+            started = true;
+            setActive(0);
+            startTimer();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(carousel);
+
+      // Initialize first item immediately (visible even without observer)
+      setActive(0);
+    }
+
+    initStreamCarousel('streamLight');
+    initStreamCarousel('streamDark');
+
+
+    /* ── 4. Testimonial Carousel ── */
+    $(document).ready(function() {
+      $('#testimonialCarousel').owlCarousel({
+        loop: true,
+        margin: 24,
+        autoplay: true,
+        autoplayTimeout: 7000,
+        smartSpeed: 800,
+        nav: false,
+        dots: true,
+        responsive: {
+          0: { items: 1 },
+          768: { items: 2 },
+          1080: { items: 3 },
+        }
+      });
+    });
+
+
+    /* ── 5. Scroll Reveal ── */
+    (function() {
+      // Activate reveal system after first paint
+      requestAnimationFrame(function() {
+        document.body.classList.add('reveal-ready');
+
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        revealEls.forEach(function(el) {
+          revealObserver.observe(el);
+        });
+      });
+    })();
+
+
+    /* ── 6. Footer year ── */
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+
+    /* ── 7. Calendly Booking Widget ── */
+    (function() {
+      var grid = document.getElementById('calGrid');
+      var timeSlotsEl = document.getElementById('calTimeSlots');
+      var timesGrid = document.getElementById('calTimes');
+      var confirmEl = document.getElementById('calConfirm');
+      var confirmBtn = document.getElementById('calConfirmBtn');
+      var successEl = document.getElementById('calSuccess');
+      var selectedDateEl = document.getElementById('calSelectedDate');
+      var monthLabel = document.getElementById('calMonthLabel');
+
+      if (!grid) return;
+
+      var now = new Date();
+      var currentMonth = now.getMonth();
+      var currentYear = now.getFullYear();
+      var selectedDay = null;
+      var selectedTime = null;
+
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var timeSlots = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'];
+
+      // Available days: Mon-Fri, not in the past, some random unavailable
+      function isAvailable(year, month, day) {
+        var d = new Date(year, month, day);
+        var dow = d.getDay();
+        if (dow === 0 || dow === 6) return false; // weekends
+        if (d < new Date(now.getFullYear(), now.getMonth(), now.getDate())) return false; // past
+        // Simulate some unavailable slots
+        if (day % 7 === 0) return false;
+        return true;
+      }
+
+      function isToday(year, month, day) {
+        return year === now.getFullYear() && month === now.getMonth() && day === now.getDate();
+      }
+
+      function renderCalendar() {
+        grid.innerHTML = '';
+        monthLabel.textContent = months[currentMonth] + ' ' + currentYear;
+
+        var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        var offset = (firstDay === 0) ? 6 : firstDay - 1; // Monday = 0
+        var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        // Empty cells for offset
+        for (var i = 0; i < offset; i++) {
+          var empty = document.createElement('div');
+          empty.className = 'cal-day';
+          grid.appendChild(empty);
+        }
+
+        for (var d = 1; d <= daysInMonth; d++) {
+          var btn = document.createElement('button');
+          btn.className = 'cal-day animate-in';
+          btn.textContent = d;
+          btn.style.animationDelay = ((offset + d) * 20) + 'ms';
+
+          if (isToday(currentYear, currentMonth, d)) {
+            btn.classList.add('today');
+          }
+
+          var dateObj = new Date(currentYear, currentMonth, d);
+          if (dateObj < new Date(now.getFullYear(), now.getMonth(), now.getDate())) {
+            btn.classList.add('past');
+          } else if (isAvailable(currentYear, currentMonth, d)) {
+            btn.classList.add('available');
+            btn.setAttribute('data-day', d);
+            btn.addEventListener('click', onDayClick);
+          }
+
+          if (selectedDay === d && currentMonth === now.getMonth()) {
+            btn.classList.add('selected');
+          }
+
+          grid.appendChild(btn);
+        }
+      }
+
+      function onDayClick(e) {
+        var day = parseInt(e.currentTarget.getAttribute('data-day'));
+        selectedDay = day;
+        selectedTime = null;
+
+        // Update visual selection
+        grid.querySelectorAll('.cal-day').forEach(function(el) { el.classList.remove('selected'); });
+        e.currentTarget.classList.add('selected');
+
+        // Show time slots
+        showTimeSlots(day);
+        confirmEl.classList.add('hidden');
+        successEl.classList.add('hidden');
+      }
+
+      function showTimeSlots(day) {
+        timesGrid.innerHTML = '';
+        timeSlotsEl.classList.remove('hidden');
+        timeSlotsEl.classList.add('cal-times-enter');
+
+        var dateStr = months[currentMonth] + ' ' + day;
+        selectedDateEl.textContent = dateStr;
+
+        // Show random subset of available times
+        var available = timeSlots.filter(function() { return Math.random() > 0.25; });
+        if (available.length < 4) available = timeSlots.slice(0, 6);
+
+        available.forEach(function(time, idx) {
+          var btn = document.createElement('button');
+          btn.className = 'cal-time-btn animate-in';
+          btn.textContent = time;
+          btn.style.animationDelay = (idx * 40) + 'ms';
+          btn.addEventListener('click', function() {
+            selectedTime = time;
+            timesGrid.querySelectorAll('.cal-time-btn').forEach(function(el) { el.classList.remove('selected'); });
+            btn.classList.add('selected');
+            confirmEl.classList.remove('hidden');
+            confirmEl.classList.add('cal-times-enter');
+          });
+          timesGrid.appendChild(btn);
+        });
+      }
+
+      // Confirm booking
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Hide calendar UI, show success
+          timeSlotsEl.classList.add('hidden');
+          confirmEl.classList.add('hidden');
+          successEl.classList.remove('hidden');
+        });
+      }
+
+      // Month navigation
+      var navBtns = document.querySelectorAll('.cal-nav-btn');
+      if (navBtns[0]) {
+        navBtns[0].addEventListener('click', function() {
+          currentMonth--;
+          if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+          selectedDay = null;
+          timeSlotsEl.classList.add('hidden');
+          confirmEl.classList.add('hidden');
+          renderCalendar();
+        });
+      }
+      if (navBtns[1]) {
+        navBtns[1].addEventListener('click', function() {
+          currentMonth++;
+          if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+          selectedDay = null;
+          timeSlotsEl.classList.add('hidden');
+          confirmEl.classList.add('hidden');
+          renderCalendar();
+        });
+      }
+
+      renderCalendar();
+    })();
+  </script>
+
+</body>
+</html>
